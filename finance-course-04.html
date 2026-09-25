@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
-  <meta name="description" content="跟着聪沐服装公司的一天，动手理解买卖盘、集合竞价、连续竞价、主力与操纵、亏损公司股价、仙股和假期交易。">
+  <meta name="description" content="跟着聪沐服装公司的一天，用 K 线模拟盘、买卖盘和集合竞价演示理解股价如何形成。">
   <title>第 04 课｜聪沐股票的一天：股价怎么形成</title>
   <style>
     :root{--paper:#f5f2e9;--white:#fffdf8;--ink:#172b36;--muted:#52666e;--line:#d6ddd6;--teal:#087d78;--teal-dark:#075c59;--teal-soft:#dcefe9;--coral:#de694e;--coral-soft:#fce8df;--gold:#f4bc61;--gold-soft:#fff1d7;--blue:#5e80ad;--shadow:0 17px 45px rgba(23,43,54,.08)}
@@ -22,11 +22,12 @@
     .role-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin:21px 0}.role-cards>div{border:1px solid var(--line);border-radius:15px;padding:18px;background:#fff}.role-cards span{font-size:27px}.role-cards b{display:block}.role-cards p{margin:6px 0 0;font-size:13px;color:var(--muted)}.role-cards .danger{background:#fff0e8;border-color:#efccbd}.two-wallets{display:grid;grid-template-columns:1fr auto 1fr;gap:9px;align-items:center;margin:17px 0}.wallet{border-radius:14px;background:#e9f5ee;padding:16px;text-align:center}.wallet:nth-child(3){background:#fff0e8}.wallet span{display:block;font-size:28px}.wallet b,.wallet small{display:block}.wallet small{color:var(--muted);font-size:12px}.two-wallets>strong{color:var(--coral);font-size:25px}
     .split-demo{display:grid;grid-template-columns:1fr auto 1fr;gap:11px;align-items:center;margin:20px 0}.split-demo>div{background:#edf5ef;border-radius:14px;padding:17px;text-align:center}.split-demo>strong{font-size:25px;color:var(--coral)}.share-token{display:inline-grid;place-items:center;background:var(--teal);color:#fff;border-radius:7px;font-weight:900;width:48px;height:46px;margin:3px;box-shadow:0 4px 0 #08534f}.share-token.many{width:25px;height:29px;font-size:11px;margin:2px}.split-demo small{display:block;color:var(--muted)}.split-demo b{font-size:18px}
     .holiday-panels{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0}.holiday-panels>div{border:1px solid var(--line);background:#fff;border-radius:14px;padding:17px}.holiday-panels b{display:block}.holiday-panels p{font-size:13px;margin:5px 0;color:var(--muted)}.holiday-panels .closed{background:#e9ece8}.episode-map{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:20px 0}.episode-map>div{background:#fff;border:1px solid var(--line);border-radius:11px;padding:11px 13px;font-size:13px}.episode-map b{color:var(--teal-dark)}
+    .papertrade{background:#111f2b;color:#e9f2ee;border:1px solid #2d4550;border-radius:20px;padding:20px;margin:24px 0;box-shadow:0 24px 55px #172b362c}.papertrade .example{background:#274c4b;color:#c6f4de}.papertrade h3{color:white}.papertrade p{color:#c9d7d4}.trade-top{display:flex;justify-content:space-between;gap:15px;align-items:start;flex-wrap:wrap}.trade-top h3{margin-bottom:2px}.trade-top small{color:#a8c0be}.trade-badge{background:#243d46;color:#e4f6ed;padding:7px 11px;border-radius:9px;font-size:12px;font-weight:800}.trade-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:18px 0}.trade-metrics>div{background:#1e3440;border:1px solid #38515b;border-radius:11px;padding:10px 12px}.trade-metrics small{display:block;color:#a8c3bc;font-size:11px}.trade-metrics strong{display:block;color:white;font-variant-numeric:tabular-nums;font-size:19px;line-height:1.35}.trade-metrics strong.positive{color:#ffad9c}.trade-metrics strong.negative{color:#95e3b8}.chart-wrap{background:#162b36;border:1px solid #37515b;border-radius:14px;padding:8px 7px 1px}.chart-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:5px;padding:4px 9px 0;font-size:12px;color:#b9d0c9}.chart-top strong{color:white}.kline-svg{display:block;width:100%;height:auto;min-height:270px;touch-action:pan-y}.chart-key{display:flex;gap:16px;flex-wrap:wrap;padding:1px 10px 9px;color:#a9c0bd;font-size:11px}.chart-key span:before{content:"";display:inline-block;width:10px;height:10px;border-radius:2px;background:#ed7056;margin-right:5px}.chart-key span:nth-child(2):before{background:#47b88c}.chart-key span:nth-child(3):before{background:#7c9aad}.trade-story{margin:12px 0;background:#243c44;border-left:3px solid var(--gold);padding:11px 13px;border-radius:0 9px 9px 0;font-size:13px;min-height:48px}.trade-story b{color:var(--gold)}.trade-controls{display:grid;grid-template-columns:minmax(0,1fr) minmax(225px,.8fr);gap:13px;margin-top:15px}.trade-ticket{border:1px solid #3a555d;border-radius:13px;padding:15px;background:#1b343d}.trade-ticket h4,.trade-ledger h4{margin:0 0 11px;font-size:15px;color:#fff}.trade-side{display:flex;gap:7px;margin-bottom:11px}.trade-side button{border:1px solid #527067;background:#274047;color:#e4f2ed;border-radius:8px;padding:7px 13px;font-size:12px;font-weight:850}.trade-side button[aria-pressed="true"]{background:var(--gold);border-color:var(--gold);color:var(--ink)}.trade-fields{display:grid;grid-template-columns:1fr 1fr;gap:9px}.trade-fields label{font-size:11px;color:#b4cdc5;font-weight:800}.trade-fields input{display:block;width:100%;border:1px solid #5b7473;border-radius:8px;background:#fff;color:var(--ink);padding:8px;margin-top:4px;font-variant-numeric:tabular-nums}.trade-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:11px}.trade-actions button{border:0;border-radius:8px;padding:8px 12px;font-weight:850;font-size:12px}.trade-actions .place{background:var(--gold);color:var(--ink)}.trade-actions .advance{background:#72d1ae;color:#10392d}.trade-actions .newgame{background:#38545a;color:white}.trade-actions button:disabled{cursor:not-allowed;opacity:.45}.trade-order{font-size:12px;color:#dce9e5;min-height:37px;margin-top:9px}.trade-order b{color:#f3c96d}.trade-note{font-size:11px;color:#afc4bc;line-height:1.5;margin-top:10px}.trade-ledger{border:1px solid #3a555d;border-radius:13px;padding:15px;background:#1b343d;min-height:245px}.trade-ledger ol{list-style:none;margin:0;padding:0;display:grid;gap:6px;max-height:240px;overflow:auto}.trade-ledger li{padding:7px 9px;background:#294650;border-radius:7px;font-size:11px;line-height:1.45}.trade-ledger li:first-child{border-left:3px solid var(--gold)}.trade-rule{font-size:12px;color:#dae8e1;background:#213a43;border-radius:10px;padding:12px 14px;margin-top:14px}.trade-rule a{color:#a7ebd5}
     @media(max-width:1100px){.shell{grid-template-columns:202px minmax(0,1fr)}.rail{padding:19px 9px}.timeline{grid-template-columns:repeat(2,1fr)}}
-    @media(max-width:760px){.shell{display:block}.rail{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:14px 17px;gap:8px}.rail nav{display:flex;overflow:auto;gap:4px}.rail nav a{white-space:nowrap}.rail small,.rail-bottom{display:none}.hero{padding:40px 22px}.hero:after{right:-320px}.content{padding:0 18px 65px}.section{padding-top:52px}.section-top{gap:10px}.num{width:35px;height:35px;font-size:12px}.grid-2,.grid-3,.comic,.order-layout,.auction-layout,.price-story,.role-cards,.holiday-panels{grid-template-columns:1fr}.comic>div:not(:last-child):after{content:"↓";right:50%;top:auto;bottom:-20px;transform:translateX(50%)}.story{display:block}.story b{display:block}.sim{padding:19px}.news-cards{grid-template-columns:1fr}.news-cards button{min-height:0;display:grid;grid-template-columns:35px 1fr;gap:2px 8px;padding:10px}.news-cards span{grid-row:span 2}.metric-row{grid-template-columns:1fr 1fr}.metric-row .metric:last-child{grid-column:span 2}.market-window{padding:12px}.market-window strong{font-size:19px}.order-actions{grid-template-columns:1fr}.order-actions button{min-height:0}.role-cards p{margin-bottom:0}}
+    @media(max-width:760px){.shell{display:block}.rail{position:relative;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:14px 17px;gap:8px}.rail nav{display:flex;overflow:auto;gap:4px}.rail nav a{white-space:nowrap}.rail small,.rail-bottom{display:none}.hero{padding:40px 22px}.hero:after{right:-320px}.content{padding:0 18px 65px}.section{padding-top:52px}.section-top{gap:10px}.num{width:35px;height:35px;font-size:12px}.grid-2,.grid-3,.comic,.order-layout,.auction-layout,.price-story,.role-cards,.holiday-panels,.trade-controls{grid-template-columns:1fr}.comic>div:not(:last-child):after{content:"↓";right:50%;top:auto;bottom:-20px;transform:translateX(50%)}.story{display:block}.story b{display:block}.sim{padding:19px}.news-cards{grid-template-columns:1fr}.news-cards button{min-height:0;display:grid;grid-template-columns:35px 1fr;gap:2px 8px;padding:10px}.news-cards span{grid-row:span 2}.metric-row{grid-template-columns:1fr 1fr}.metric-row .metric:last-child{grid-column:span 2}.market-window{padding:12px}.market-window strong{font-size:19px}.order-actions{grid-template-columns:1fr}.order-actions button{min-height:0}.role-cards p{margin-bottom:0}.trade-metrics{grid-template-columns:1fr 1fr}.papertrade{padding:14px}.chart-wrap{overflow-x:auto}.kline-svg{min-width:650px}}
     @media(max-width:440px){.metric-row,.episode-map{grid-template-columns:1fr}.metric-row .metric:last-child{grid-column:auto}.news-result{grid-template-columns:1fr}.market-window{grid-template-columns:1fr 1fr}.market-window .last{grid-column:span 2;grid-row:1}.split-demo{grid-template-columns:1fr}.split-demo>strong{transform:rotate(90deg);text-align:center}.two-wallets{grid-template-columns:1fr}.two-wallets>strong{text-align:center;transform:rotate(90deg)}.timeline{grid-template-columns:1fr}}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}}
-    @media print{.rail,.hero-cta,.progress,.choice-row,.order-actions,.reset,.news-cards{display:none!important}.shell{display:block}.hero{background:#fff;color:#000;padding:10px 0 18px}.hero .lead{color:#222}.content{max-width:none;padding:0}.section{break-inside:avoid;padding-top:23px}.card,.sim{box-shadow:none}}
+    @media print{.rail,.hero-cta,.progress,.choice-row,.order-actions,.reset,.news-cards,.trade-actions,.trade-side{display:none!important}.shell{display:block}.hero{background:#fff;color:#000;padding:10px 0 18px}.hero .lead{color:#222}.content{max-width:none;padding:0}.section{break-inside:avoid;padding-top:23px}.card,.sim{box-shadow:none}}
   </style>
 </head>
 <body>
@@ -35,7 +36,7 @@
     <aside class="rail" aria-label="课程目录">
       <div class="brand"><span class="brand-mark" aria-hidden="true">¥</span><span>跟着聪沐学金融</span></div>
       <small>第 04 课 · 聪沐股票的一天</small>
-      <nav id="toc"><a href="#opening">00 上市后的第一天</a><a href="#quote">01 报价与成交价</a><a href="#continuous">02 盘中逐笔撮合</a><a href="#call">03 开盘集合竞价</a><a href="#timing">04 买后跌、卖后涨</a><a href="#expectations">05 亏损为何也会涨</a><a href="#players">06 主力与庄家</a><a href="#fund">07 基金经理自购</a><a href="#penny">08 “仙股”与价格幻觉</a><a href="#holiday">09 假期与 A 股</a><a href="#recap">10 故事回顾</a></nav>
+      <nav id="toc"><a href="#opening">00 上市后的第一天</a><a href="#quote">01 报价与成交价</a><a href="#continuous">02 盘中逐笔撮合</a><a href="#call">03 开盘集合竞价</a><a href="#papertrade">04 聪沐 K 线模拟盘</a><a href="#timing">05 买后跌、卖后涨</a><a href="#expectations">06 亏损为何也会涨</a><a href="#players">07 主力与庄家</a><a href="#fund">08 基金经理自购</a><a href="#penny">09 “仙股”与价格幻觉</a><a href="#holiday">10 假期与 A 股</a><a href="#recap">11 故事回顾</a></nav>
       <div class="rail-bottom"><b>阅读提示</b>聪沐与页面内订单均为虚构教学示意；真实制度和案例附官方来源。<a href="index.html">返回课程首页 ↗</a></div>
     </aside>
     <main class="main">
@@ -43,7 +44,7 @@
         <div class="eyebrow">Finance · lesson 04 / 11</div>
         <h1>聪沐股票的一天：<br>股价怎么形成？</h1>
         <p class="lead">上市之后，你开了一天股价页面：有人出价，有人卖出，价格一会儿高一会儿低。<b>谁定的价？屏幕上的变化，又和聪沐的生意有什么关系？</b></p>
-        <div class="hero-meta"><span class="tag">买一与卖一</span><span class="tag">集合竞价</span><span class="tag">连续竞价</span><span class="tag">主力与操纵</span><span class="tag">预期与股价</span></div>
+        <div class="hero-meta"><span class="tag">K 线模拟盘</span><span class="tag">买一与卖一</span><span class="tag">集合竞价</span><span class="tag">连续竞价</span><span class="tag">主力与操纵</span><span class="tag">预期与股价</span></div>
         <a class="hero-cta" href="#opening">跟聪沐看一天行情 ↓</a>
       </header>
       <div class="content">
@@ -85,8 +86,22 @@
           <p class="mini">真实交易还要满足集合竞价的其他价格条件；若多个价格都符合，按现行规则处理未成交量和并列价格。页面只演示三组无并列的简化订单，不用它预测真实开盘价。<a href="https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/exchange/c/c_20260424_10816482.shtml" target="_blank" rel="noopener noreferrer">看《上海证券交易所交易规则（2026 年修订）》3.5.2 ↗</a></p>
         </section>
 
+        <section class="section" id="papertrade">
+          <div class="section-top"><span class="num">04</span><div><p class="kicker">先看 K 线，再用虚拟资金操作</p><h2>聪沐 K 线模拟盘：下一天会怎样？</h2><span class="episode">本课新增体验；提前认识第 18 集的 K 线</span></div></div>
+          <p class="intro">阿林把交易软件拿给朋友小周看。每根 K 线记录<b>一个虚构交易日</b>的开盘、最高、最低、收盘；下方柱子是成交量。小周有 ¥20,000 虚拟资金，只能看到已经结束的交易日，可以为<b>下一交易日</b>挂一笔限价单，再揭晓新 K 线。你的下单不会改写预先生成的市场行情。</p>
+          <div class="papertrade" aria-labelledby="paperTitle">
+            <div class="trade-top"><div><span class="example">虚构行情 · 仅供学习 · 无真实交易</span><h3 id="paperTitle">聪沐服装 · 模拟交易终端</h3><small>沪市主板普通股票的简化场景；从上市一段时间后开始，不模拟新股前五日。</small></div><span class="trade-badge" id="paperDay">第 12 / 30 个交易日</span></div>
+            <div class="trade-metrics" aria-live="polite"><div><small>总资产</small><strong id="paperEquity">¥20,000.00</strong></div><div><small>可用现金</small><strong id="paperCash">¥20,000.00</strong></div><div><small>持有聪沐</small><strong id="paperShares">0 股</strong></div><div><small>累计盈亏</small><strong id="paperPnl">¥0.00</strong></div></div>
+            <div class="chart-wrap"><div class="chart-top"><span><strong id="paperClose">¥10.00</strong>　<span id="paperChange">最近收盘</span></span><span id="paperCandleInfo">点 K 线看开高低收与成交量</span></div><svg class="kline-svg" id="klineChart" viewBox="0 0 900 420" role="img" aria-label="聪沐虚构日 K 线图，红色上涨，绿色下跌，下方为成交量"></svg><div class="chart-key"><span>红色：收盘高于或等于开盘</span><span>绿色：收盘低于开盘</span><span>灰蓝柱：成交量</span></div></div>
+            <div class="trade-story" id="paperStory" aria-live="polite"><b>聪沐消息</b>　你只看到了已经发生的行情。下一交易日的信息会和新 K 线一起出现。</div>
+            <div class="trade-controls"><div class="trade-ticket"><h4>为下一交易日填写一笔限价单</h4><div class="trade-side" role="group" aria-label="模拟订单方向"><button type="button" data-side="buy" aria-pressed="true">买入</button><button type="button" data-side="sell" aria-pressed="false">卖出</button></div><div class="trade-fields"><label for="paperLimit">限价，元/股<input id="paperLimit" type="number" inputmode="decimal" min="0.01" step="0.01" value="10.00"></label><label for="paperQty">数量，股<input id="paperQty" type="number" inputmode="numeric" min="100" step="100" value="100"></label></div><div class="trade-actions"><button type="button" class="place" id="placePaper">挂单</button><button type="button" class="advance" id="advancePaper">进入下一交易日 →</button><button type="button" class="newgame" id="resetPaper">换个行情重来</button></div><div class="trade-order" id="paperOrder" aria-live="polite">当前没有待执行委托；也可以直接进入下一天观察行情。</div><div class="trade-note">本模拟只保留一笔待执行委托；重新挂单会替换旧单。若次日未触及限价，委托当日失效。买入以 100 股的整数倍申报；买入的股票最早在后一个交易日卖出。</div></div><div class="trade-ledger"><h4>交易与消息记录</h4><ol id="paperLog" aria-live="polite"><li>开局：小周持有 ¥20,000 虚拟现金。</li></ol></div></div>
+            <div class="trade-rule"><b>模拟规则：</b>次日开盘若已达到你的限价，按开盘价模拟成交；否则只要当天高低价触及限价，就按限价模拟成交。含示意佣金（按成交额 0.03%，最低 ¥5）、双向过户费 0.001% 与卖出印花税 0.05%。<b>真实交易不能只靠日 K 线断定是否排队成交</b>，还会受订单簿、申报时间、成交量、交易阶段与券商收费影响。这里不模拟分红、停牌和公司管理层买卖本公司股票的特别约束。<a href="https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/exchange/c/c_20260424_10816482.shtml" target="_blank" rel="noopener noreferrer">查看上交所现行交易规则 ↗</a></div>
+          </div>
+          <div class="callout light"><b>看 K 线时先问四个价格</b><p>开盘价是当天开始交易后的成交价格，最高与最低是当天成交过的极值，收盘价是当日最后的官方收盘价格。红绿只描述当天开盘到收盘的方向；一根红 K 线也可能比前一日收盘价低。K 线怎样生成及其局限，会在第 07 课继续展开。</p></div>
+        </section>
+
         <section class="section" id="timing">
-          <div class="section-top"><span class="num">04</span><div><p class="kicker">把先后顺序和因果分开</p><h2>为什么阿林“一买就跌、一卖就涨”？</h2><span class="episode">对应合集：第 52 集；衔接第 21 集</span></div></div>
+          <div class="section-top"><span class="num">05</span><div><p class="kicker">把先后顺序和因果分开</p><h2>为什么阿林“一买就跌、一卖就涨”？</h2><span class="episode">对应合集：第 52 集；衔接第 21 集</span></div></div>
           <p class="intro">阿林的一笔成交只是在当时的订单中撮合出来；之后还有无数新订单和新信息。<b>“买完之后跌”</b>是时间顺序，不足以证明市场专门盯着阿林。薄弱买卖盘里，较大的订单也可能短时影响价格；影响程度要看交易量和深度。</p>
           <div class="story"><b>阿林的小故事</b><p>周一他见聪沐涨到 ¥10.20，担心错过，终于买了；周二大客户订单延期，别的投资者降低买价，股价回落。后来他以 ¥9.80 卖出，周三延期问题解决，买盘又抬高价格。两次“反着走”，背后是信息和其他人的订单。</p></div>
           <div class="price-story"><div><b>买后跌：后续出现卖压</b><svg viewBox="0 0 270 100" role="img" aria-label="虚构折线：买入后价格下降"><line x1="8" y1="80" x2="262" y2="80" stroke="#d6ddd6"/><polyline points="10,55 55,42 95,35 135,28 170,52 215,63 260,70"/></svg><small>买在前，坏消息和新卖单在后。</small></div><div class="sell"><b>卖后涨：后续出现买盘</b><svg viewBox="0 0 270 100" role="img" aria-label="虚构折线：卖出后价格上升"><line x1="8" y1="80" x2="262" y2="80" stroke="#d6ddd6"/><polyline points="10,65 55,72 95,70 135,62 170,44 215,32 260,23"/></svg><small>卖在前，好消息和新买单在后。</small></div></div>
@@ -94,48 +109,48 @@
         </section>
 
         <section class="section" id="expectations">
-          <div class="section-top"><span class="num">05</span><div><p class="kicker">价格交易的是对未来的不同看法</p><h2>聪沐今年亏了钱，股价为何还可能涨？</h2><span class="episode">对应合集：第 53 集；衔接第 13、91 集</span></div></div>
+          <div class="section-top"><span class="num">06</span><div><p class="kicker">价格交易的是对未来的不同看法</p><h2>聪沐今年亏了钱，股价为何还可能涨？</h2><span class="episode">对应合集：第 53 集；衔接第 13、91 集</span></div></div>
           <p class="intro">股价不是把当年利润直接写到屏幕上。假设聪沐去年亏损 200 万元，投资者仍会判断未来订单、成本和风险。若新信息让更多人愿出更高价格，成交价可能上涨；如果期望落空，也可能下跌。<b>亏损与上涨可以同时发生，不代表风险消失。</b></p>
           <div class="sim" aria-labelledby="newsTitle"><span class="example">聪沐公告室 · 情境演示</span><h3 id="newsTitle">同一份亏损年报，遇到三种后续信息</h3><p>以下价格变化只为说明方向与逻辑，不是收益预测。点一张消息卡，看看阿林为何重新评估未来。</p><div class="news-cards" role="group" aria-label="聪沐后续公告情境"><button type="button" data-news="order" aria-pressed="true"><span aria-hidden="true">📦</span><b>新订单确认</b><small>未来销售可能改善</small></button><button type="button" data-news="delay" aria-pressed="false"><span aria-hidden="true">⏳</span><b>扩厂延期</b><small>交货与成本压力增加</small></button><button type="button" data-news="unknown" aria-pressed="false"><span aria-hidden="true">❔</span><b>消息不完整</b><small>投资者看法分歧</small></button></div><div class="news-result" aria-live="polite"><div><small>虚构成交价</small><strong id="newsPrice">¥12.00</strong><small>原价假设 ¥10.00</small></div><p id="newsExplain">确认的长期订单让部分投资者上调未来现金流预期，愿意出更高价。公司过去一年仍亏损 200 万元；新订单也不等于利润已经兑现。</p></div><div class="metric-row"><div class="metric"><small>假设已发行股数</small><strong>80 万股</strong></div><div class="metric"><small>按当前价算的市值</small><strong id="newsCap">¥960 万</strong></div><div class="metric"><small>公司账上因股价变动新增现金</small><strong>¥0</strong></div></div></div>
           <div class="grid-2"><div class="card"><h3>可能解释上涨的因素</h3><p>对未来利润、融资、产品和管理的预期改善；也可能仅是短期交易需求增加。需要用公告、财报与成交信息交叉判断，不能由涨价反推“公司已赚钱”。</p></div><div class="card warm"><h3>第 91 集的开放问题</h3><p>“A 股现在最需要什么”是观点题，没有唯一数值答案。对个人学习更有用的角度是：公司披露是否可信、交易规则能否支持有序定价、风险是否被充分认识。下次看价格，先问这些事实。</p></div></div>
         </section>
 
         <section class="section" id="players">
-          <div class="section-top"><span class="num">06</span><div><p class="kicker">大订单不等于神秘总导演</p><h2>“主力”和“庄家”，到底指什么？</h2><span class="episode">对应合集：第 14、15 集</span></div></div>
+          <div class="section-top"><span class="num">07</span><div><p class="kicker">大订单不等于神秘总导演</p><h2>“主力”和“庄家”，到底指什么？</h2><span class="episode">对应合集：第 14、15 集</span></div></div>
           <p class="intro">“主力”常被用来泛指资金量较大的参与者，不是交易规则里统一的账户身份；“庄家”则常带有集中资金、操纵股价的语感。看到价格急变，不应自动归因于一个人。要区分<b>正常大额交易</b>与<b>误导市场、操纵价格的行为</b>。</p>
           <div class="role-cards"><div><span aria-hidden="true">🏦</span><b>正常的大额订单</b><p>机构也可以基于研究买卖，成交仍受订单簿和规则约束。订单大，会影响市场，但不能单凭“大”定性违法。</p></div><div class="danger"><span aria-hidden="true">🎭</span><b>虚假申报与频繁撤单</b><p>若不以成交为目的，制造看似很强的买盘来误导别人，就可能触及异常交易或操纵监管。</p></div><div class="danger"><span aria-hidden="true">🔁</span><b>自己控制的账户对倒</b><p>同一控制人账户互相成交，制造虚假成交量或价格信号，与正常买卖不同。</p></div></div>
           <div class="card pale"><span class="example real">真实执法案例 · 北八道</span><h3>被查明的操纵，不靠猜测</h3><p>证监会通报：北八道集团使用大量账户，对部分次新股实施频繁对倒、盘中拉抬等操纵行为，并受到处罚。这里引用的是监管机构查明的历史案件；不能因为某只股票今天有大单，就推断它也被操纵。<a href="https://www.csrc.gov.cn/csrc/c100200/c1000469/content.shtml" target="_blank" rel="noopener noreferrer">看证监会案例 ↗</a></p></div>
         </section>
 
         <section class="section" id="fund">
-          <div class="section-top"><span class="num">07</span><div><p class="kicker">经理的钱与客户的钱</p><h2>基金经理能买自己管理的基金吗？</h2><span class="episode">对应合集：第 43 集</span></div></div>
+          <div class="section-top"><span class="num">08</span><div><p class="kicker">经理的钱与客户的钱</p><h2>基金经理能买自己管理的基金吗？</h2><span class="episode">对应合集：第 43 集</span></div></div>
           <p class="intro">基金经理个人购买基金份额，与拿基金资产去买股票，是两本账。前者是个人成为基金持有人；后者是管理人按照基金合同为持有人投资。基金经理自购并不自动证明产品值得买，还要防范内幕信息、利益输送和不公平交易。</p>
           <div class="two-wallets" aria-label="个人资金与基金财产分开"><div class="wallet"><span aria-hidden="true">👛</span><b>经理的个人钱包</b><small>按规则购买基金份额，盈亏由本人承担</small></div><strong aria-hidden="true">≠</strong><div class="wallet"><span aria-hidden="true">🧺</span><b>基金持有人的钱</b><small>基金按合同投资股票等资产，为持有人管理</small></div></div>
           <div class="grid-2"><div class="card pale"><span class="example real">证监会规定</span><h3>允许的前提是守规矩</h3><p>证监会《关于基金从业人员投资证券投资基金有关事项的规定》要求遵守法律和单位制度，防范利益冲突及利益输送，禁止利用内幕信息或其他未公开信息违规买卖基金。<a href="https://www.csrc.gov.cn/csrc/c101877/c1029606/content.shtml" target="_blank" rel="noopener noreferrer">看原规定 ↗</a></p></div><div class="card"><h3>作为投资者怎么看自购？</h3><p>自购可能表达经理与持有人利益一致的意愿，但不能单凭一张自购公告判断未来收益。仍要看投资目标、持仓、费用、风险和长期结果。</p></div></div>
         </section>
 
         <section class="section" id="penny">
-          <div class="section-top"><span class="num">08</span><div><p class="kicker">每股价格低，不等于整家公司便宜</p><h2>“仙股”为什么容易让人看错？</h2><span class="episode">对应合集：第 32 集</span></div></div>
+          <div class="section-top"><span class="num">09</span><div><p class="kicker">每股价格低，不等于整家公司便宜</p><h2>“仙股”为什么容易让人看错？</h2><span class="episode">对应合集：第 32 集</span></div></div>
           <p class="intro">港交所的中港金融词汇对照表把“仙股”解释为股价低于 <b>港币 0.1 元</b>的股票，这是港股语境中的俗称。单股价格很低，不代表企业总价值低，也不代表跌不动。先看总股数、总市值、资产和经营风险。</p>
           <div class="sim" aria-labelledby="splitTitle"><span class="example">十份蛋糕示意 · 只是数学比较</span><h3 id="splitTitle">同一块“聪沐蛋糕”，切成更多份会发生什么？</h3><p>这里只演示股份拆细后的算术：假设你的持股对应的公司价值为 ¥100，原先 1 股标价 ¥100；拆成 10 股后，每股对应 ¥10。没有新资金流入，持股的合计价值仍按原假设为 ¥100。</p><div class="split-demo"><div><span class="share-token">1 股</span><small>每股 ¥100</small><b>合计 ¥100</b></div><strong aria-hidden="true">→</strong><div><span class="share-token many">1</span><span class="share-token many">2</span><span class="share-token many">3</span><span class="share-token many">4</span><span class="share-token many">5</span><span class="share-token many">6</span><span class="share-token many">7</span><span class="share-token many">8</span><span class="share-token many">9</span><span class="share-token many">10</span><small>每股 ¥10</small><b>合计 ¥100</b></div></div><div class="formula">更极端地切分，每股数字还会更小；这本身不让公司变“便宜”。现实股价还会随交易变化，拆细也要符合适用制度。<a href="https://www.hkex.com.hk/-/media/hkex-market/mutual-market/stock-connect/reference-materials/resources/glossary_simplified" target="_blank" rel="noopener noreferrer">看港交所词汇表 ↗</a></div></div>
           <div class="callout light"><b>一个更好的比较式</b><p>总市值 ≈ 每股价格 × 已发行股数。同样是 ¥1 的股票，若总股数一个是 100 万股、另一个是 100 亿股，它们的总市值天差地别。是否“划算”还要看盈利、现金流、债务和风险；第五课会专门讲估值。</p></div>
         </section>
 
         <section class="section" id="holiday">
-          <div class="section-top"><span class="num">09</span><div><p class="kicker">休市期间，信息不会停止</p><h2>国庆假期会让 A 股自动上涨吗？</h2><span class="episode">对应合集：第 61 集；衔接第 91 集</span></div></div>
+          <div class="section-top"><span class="num">10</span><div><p class="kicker">休市期间，信息不会停止</p><h2>国庆假期会让 A 股自动上涨吗？</h2><span class="episode">对应合集：第 61 集；衔接第 91 集</span></div></div>
           <p class="intro">交易所休市时，股票不能在该交易时段撮合，但聪沐仍在卖衣服，国内外新闻也可能继续发生。开市后，投资者把新信息和预期放进订单里，价格可能高开、低开或变化不大。<b>假期本身不是一个保证涨跌的按钮。</b></p>
           <div class="holiday-panels" aria-label="假期期间的聪沐小故事"><div><b>📦 假期前</b><p>阿林看到聪沐最近一笔成交为 ¥10。买卖盘等待下一个交易日。</p></div><div class="closed"><b>🔒 交易所休市</b><p>聪沐门店照常卖卫衣；有好消息、坏消息或没有大变化，都可能发生。</p></div><div><b>🔔 下次开市</b><p>新的订单进入集合竞价，再由撮合规则产生开盘价，不必等于假期前的 ¥10。</p></div></div>
           <div class="card pale"><span class="example real">真实时间表 · 2026 年</span><h3>先看交易所公告</h3><p>上交所公告：2026 年中秋节 9 月 25—27 日休市、9 月 28 日起开市；国庆节 10 月 1—7 日休市、10 月 8 日起开市。假期安排会逐年变化，实际交易要以当年交易所公告为准。<a href="https://big5.sse.com.cn/site/cht/www.sse.com.cn/disclosure/announcement/general/c/c_20260915_10832273.shtml" target="_blank" rel="noopener noreferrer">看上交所公告 ↗</a></p></div>
         </section>
 
         <section class="section" id="recap">
-          <div class="section-top"><span class="num">10</span><div><p class="kicker">把聪沐的一天连起来</p><h2>报价是意愿，成交才有最新价</h2></div></div>
+          <div class="section-top"><span class="num">11</span><div><p class="kicker">把聪沐的一天连起来</p><h2>报价是意愿，成交才有最新价</h2></div></div>
           <p class="intro">开盘前先集中撮合，盘中逐笔撮合，收盘前再集中撮合。新的企业信息会改变投资者的想法，但必须变成实际订单和成交，才体现在成交价上。价格低不等于便宜，资金大不等于能合法操纵；看行情时先问“发生了什么交易”，再问“企业和预期发生了什么变化”。</p>
           <div class="episode-map"><div><b>股价、报价与成交：</b>第 13、21、25 集</div><div><b>主力与操纵：</b>第 14、15 集</div><div><b>价格错觉与交易体验：</b>第 32、52 集</div><div><b>基金经理自购：</b>第 43 集</div><div><b>亏损、预期与市场：</b>第 53、91 集</div><div><b>假期与交易时间：</b>第 61 集</div></div>
           <div class="callout"><b>阿林最后记下四句话</b><p>买一和卖一是待成交报价；集合竞价优先寻找可实现的最大成交量；最新股价不是公司现金；行情变化需要证据解释，不能只凭“主力”“节日”“亏损”三个词下结论。</p></div>
           <h3 style="margin-top:34px">资料与制作说明</h3>
-          <p>聪沐、阿林、订单簿、竞价数量、公告情境和全部模拟价格均为虚构教学示例。真实规则与案例附原始来源。本课根据合集的<b>视频标题</b>规划覆盖范围，未逐集核实视频中的具体说法。资料核对于 2026 年 9 月；交易规则、假期安排及基金合规要求以当期正式文件为准。课程用于理解概念，不作个别投资建议。</p>
-          <ol class="sources"><li><a href="https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/exchange/c/c_20260424_10816482.shtml" target="_blank" rel="noopener noreferrer">上海证券交易所交易规则（2026 年修订）</a>：交易时间、价格时间优先、集合与连续竞价。</li><li><a href="https://www.investor.gov/introduction-investing/investing-basics/glossary/ask-price" target="_blank" rel="noopener noreferrer">Investor.gov：买价、卖价与价差</a>；<a href="https://www.investor.gov/introduction-investing" target="_blank" rel="noopener noreferrer">影响股价的因素</a>。</li><li><a href="https://www.csrc.gov.cn/csrc/c100200/c1000469/content.shtml" target="_blank" rel="noopener noreferrer">证监会：北八道操纵市场案</a>；<a href="https://www.csrc.gov.cn/csrc/c101877/c1029606/content.shtml" target="_blank" rel="noopener noreferrer">基金从业人员投资基金规定</a>。</li><li><a href="https://www.hkex.com.hk/-/media/hkex-market/mutual-market/stock-connect/reference-materials/resources/glossary_simplified" target="_blank" rel="noopener noreferrer">港交所：中港金融词汇对照表（仙股）</a>；<a href="https://www.investor.gov/introduction-investing/investing-basics/glossary/stock-split" target="_blank" rel="noopener noreferrer">Investor.gov：股份拆细</a>。</li><li><a href="https://big5.sse.com.cn/site/cht/www.sse.com.cn/disclosure/announcement/general/c/c_20260915_10832273.shtml" target="_blank" rel="noopener noreferrer">上交所：2026 年中秋节、国庆节休市安排</a>。</li></ol>
+          <p>聪沐、阿林、订单簿、竞价数量、模拟盘、公告情境和全部模拟价格均为虚构教学示例。模拟盘每次重开随机生成价格路径，与真实市场或未来行情无关。真实规则与案例附原始来源。本课根据合集的<b>视频标题</b>规划覆盖范围，未逐集核实视频中的具体说法。资料核对于 2026 年 9 月；交易规则、税费、假期安排及基金合规要求以当期正式文件为准。课程用于理解概念，不作个别投资建议。</p>
+          <ol class="sources"><li><a href="https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/exchange/c/c_20260424_10816482.shtml" target="_blank" rel="noopener noreferrer">上海证券交易所交易规则（2026 年修订）</a>：交易时间、100 股申报、交易日限制、价格时间优先、集合与连续竞价。</li><li><a href="https://one.sse.com.cn/onething/gptz/" target="_blank" rel="noopener noreferrer">上交所：股票投资与交易费用</a>：印花税、过户费和佣金；模拟盘佣金率为教学假设。</li><li><a href="https://www.investor.gov/introduction-investing/investing-basics/glossary/ask-price" target="_blank" rel="noopener noreferrer">Investor.gov：买价、卖价与价差</a>；<a href="https://www.investor.gov/introduction-investing" target="_blank" rel="noopener noreferrer">影响股价的因素</a>。</li><li><a href="https://www.csrc.gov.cn/csrc/c100200/c1000469/content.shtml" target="_blank" rel="noopener noreferrer">证监会：北八道操纵市场案</a>；<a href="https://www.csrc.gov.cn/csrc/c101877/c1029606/content.shtml" target="_blank" rel="noopener noreferrer">基金从业人员投资基金规定</a>。</li><li><a href="https://www.hkex.com.hk/-/media/hkex-market/mutual-market/stock-connect/reference-materials/resources/glossary_simplified" target="_blank" rel="noopener noreferrer">港交所：中港金融词汇对照表（仙股）</a>；<a href="https://www.investor.gov/introduction-investing/investing-basics/glossary/stock-split" target="_blank" rel="noopener noreferrer">Investor.gov：股份拆细</a>。</li><li><a href="https://big5.sse.com.cn/site/cht/www.sse.com.cn/disclosure/announcement/general/c/c_20260915_10832273.shtml" target="_blank" rel="noopener noreferrer">上交所：2026 年中秋节、国庆节休市安排</a>。</li></ol>
           <div class="footer"><a href="index.html">返回课程首页</a> · <a href="finance-course-03.html">回看第 03 课</a> · 第 04 课 · 版本 2026-09-25 · 独立 HTML，可离线阅读与操作；官方资料链接需要联网。</div>
         </section>
       </div>
@@ -210,6 +225,141 @@
     const newsCases={order:{price:12,text:'确认的长期订单让部分投资者上调未来现金流预期，愿意出更高价。公司过去一年仍亏损 200 万元；新订单也不等于利润已经兑现。'},delay:{price:8,text:'扩厂延期可能带来交货和成本压力，部分投资者调低愿付价格。股价下跌也不能单凭一天交易推断公司最终会亏多少。'},unknown:{price:10,text:'消息不完整时，有人看好也有人担心；这里假设成交价暂时仍为 ¥10。现实交易不一定停在原价，取决于不断进入的订单。'}};
     function showNews(key){const d=newsCases[key];document.querySelectorAll('[data-news]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.news===key)));byId('newsPrice').textContent=money(d.price);byId('newsCap').textContent='¥'+(d.price*80).toFixed(0)+' 万';byId('newsExplain').textContent=d.text}
     document.querySelectorAll('[data-news]').forEach(b=>b.addEventListener('click',()=>showNews(b.dataset.news)));showNews('order');
+
+    const roundCent=n=>Math.round(n*100)/100;
+    const cashText=n=>'¥'+n.toLocaleString('zh-CN',{minimumFractionDigits:2,maximumFractionDigits:2});
+    const paperStore='congmu-papertrade-v1';
+    const paperNews={14:'聪沐公布一批秋装订单，但交货和利润仍有不确定性。',20:'布料采购价上升，市场重新估计聪沐的成本压力。',25:'新工厂试生产进度有了更新，投资者仍在判断能否按期交货。'};
+    const svgNS='http://www.w3.org/2000/svg';
+    const svgNode=(tag,attrs)=>{const el=document.createElementNS(svgNS,tag);for(const [k,v] of Object.entries(attrs))el.setAttribute(k,String(v));return el};
+    function generatePaperBars(){
+      const bars=[];let previous=10;
+      for(let i=0;i<30;i++){
+        const floor=roundCent(previous*.9),ceiling=roundCent(previous*1.1);
+        const shock=i===14?.035:i===20?-.045:i===25?.03:0;
+        const clamp=n=>Math.min(ceiling,Math.max(floor,roundCent(n)));
+        const open=clamp(previous*(1+(Math.random()-.5)*.023));
+        const close=clamp(previous*(1+shock+(Math.random()-.5)*.045));
+        const high=clamp(Math.max(open,close)*(1+Math.random()*.017));
+        const low=clamp(Math.min(open,close)*(1-Math.random()*.017));
+        const volume=Math.round((80000+Math.random()*210000)/1000)*1000;
+        bars.push({open,high:Math.max(high,open,close),low:Math.min(low,open,close),close,volume});
+        previous=close;
+      }
+      return bars;
+    }
+    function freshPaper(){return{bars:generatePaperBars(),index:11,cash:20000,shares:0,avgCost:0,realized:0,fees:0,pending:null,side:'buy',logs:['开局：小周持有 ¥20,000 虚拟现金。']}}
+    function readPaper(){
+      try{const x=JSON.parse(localStorage.getItem(paperStore));if(x&&Array.isArray(x.bars)&&x.bars.length===30&&Number.isInteger(x.index)&&x.index>=11&&x.index<30&&typeof x.cash==='number'&&typeof x.shares==='number'&&Array.isArray(x.logs))return x}catch(e){}
+      return freshPaper();
+    }
+    let paper=readPaper();
+    const savePaper=()=>{try{localStorage.setItem(paperStore,JSON.stringify(paper))}catch(e){}};
+    function showCandle(i){
+      const b=paper.bars[i],prior=i?paper.bars[i-1].close:10,change=(b.close/prior-1)*100;
+      byId('paperCandleInfo').textContent='第 '+(i+1)+' 天｜开 '+money(b.open)+'　高 '+money(b.high)+'　低 '+money(b.low)+'　收 '+money(b.close)+'　量 '+b.volume.toLocaleString('zh-CN')+' 股';
+      if(i===paper.index)byId('paperChange').textContent=(change>=0?'+':'')+change.toFixed(2)+'% 比前一日';
+    }
+    function drawPaperChart(){
+      const svg=byId('klineChart'),visible=paper.bars.slice(0,paper.index+1),n=visible.length;
+      const lowest=Math.min(...visible.map(b=>b.low)),highest=Math.max(...visible.map(b=>b.high));
+      const padding=Math.max(.15,(highest-lowest)*.12),low=lowest-padding,high=highest+padding;
+      const y=p=>24+(high-p)/(high-low)*258,step=760/n,x=i=>72+step*(i+.5),bodyWidth=Math.min(19,step*.55);
+      const maxVolume=Math.max(...visible.map(b=>b.volume)),children=[];
+      for(let k=0;k<5;k++){
+        const gy=24+k*64.5,price=high-(high-low)*k/4;
+        children.push(svgNode('line',{x1:48,y1:gy,x2:850,y2:gy,stroke:'#34505a','stroke-width':1}));
+        const label=svgNode('text',{x:855,y:gy+4,fill:'#afc5c1','font-size':12});label.textContent=money(price);children.push(label);
+      }
+      children.push(svgNode('line',{x1:48,y1:302,x2:850,y2:302,stroke:'#57727b','stroke-width':1}));
+      const vLabel=svgNode('text',{x:51,y:324,fill:'#9db8b4','font-size':11});vLabel.textContent='成交量';children.push(vLabel);
+      visible.forEach((b,i)=>{
+        const cx=x(i),up=b.close>=b.open,color=up?'#ed7056':'#47b88c';
+        children.push(svgNode('line',{x1:cx,y1:y(b.high),x2:cx,y2:y(b.low),stroke:color,'stroke-width':2}));
+        children.push(svgNode('rect',{x:cx-bodyWidth/2,y:Math.min(y(b.open),y(b.close)),width:bodyWidth,height:Math.max(2,Math.abs(y(b.open)-y(b.close))),rx:1,fill:color}));
+        const vh=b.volume/maxVolume*61;
+        children.push(svgNode('rect',{x:cx-bodyWidth/2,y:384-vh,width:bodyWidth,height:vh,fill:'#7c9aad',opacity:.78}));
+        if(i===n-1||i%Math.max(1,Math.ceil(n/7))===0){const day=svgNode('text',{x:cx,y:402,fill:'#a8c0bc','font-size':10,'text-anchor':'middle'});day.textContent=String(i+1);children.push(day)}
+        const hit=svgNode('rect',{x:cx-step/2,y:21,width:step,height:365,fill:'transparent',style:'cursor:crosshair'});
+        const title=svgNode('title',{});title.textContent='第 '+(i+1)+' 天，开 '+money(b.open)+'，高 '+money(b.high)+'，低 '+money(b.low)+'，收 '+money(b.close);hit.append(title);
+        hit.addEventListener('pointerenter',()=>showCandle(i));hit.addEventListener('click',()=>showCandle(i));children.push(hit);
+      });
+      const last=visible[n-1].close;
+      children.push(svgNode('line',{x1:48,y1:y(last),x2:850,y2:y(last),stroke:'#e9bc68','stroke-width':1,'stroke-dasharray':'5 5'}));
+      svg.replaceChildren(...children);
+      svg.onpointerleave=()=>showCandle(paper.index);
+      showCandle(paper.index);
+    }
+    function paperFees(amount,side){
+      const commission=Math.max(5,amount*.0003),transfer=amount*.00001,stamp=side==='sell'?amount*.0005:0;
+      return roundCent(commission+transfer+stamp);
+    }
+    function renderPaper(){
+      const bar=paper.bars[paper.index],prior=paper.index?paper.bars[paper.index-1].close:10;
+      const equity=roundCent(paper.cash+paper.shares*bar.close),pnl=roundCent(equity-20000);
+      byId('paperDay').textContent='第 '+(paper.index+1)+' / '+paper.bars.length+' 个交易日';
+      byId('paperEquity').textContent=cashText(equity);byId('paperCash').textContent=cashText(paper.cash);byId('paperShares').textContent=paper.shares+' 股';
+      byId('paperPnl').textContent=(pnl>0?'+':'')+cashText(pnl);byId('paperPnl').classList.toggle('positive',pnl>0);byId('paperPnl').classList.toggle('negative',pnl<0);
+      byId('paperClose').textContent=money(bar.close);
+      const comparison=bar.close>prior?'高于前一日':bar.close<prior?'低于前一日':'与前一日持平';
+      byId('paperStory').textContent=paperNews[paper.index]||('第 '+(paper.index+1)+' 天：聪沐没有新公告；价格由市场订单形成。今日收盘 '+money(bar.close)+'，'+comparison+'。');
+      byId('paperOrder').textContent=paper.pending?('待执行：'+(paper.pending.side==='buy'?'买入':'卖出')+' '+paper.pending.qty+' 股，限价 '+money(paper.pending.price)+'。下一交易日揭晓。'):'当前没有待执行委托；也可以直接进入下一天观察行情。';
+      document.querySelectorAll('[data-side]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.side===paper.side)));
+      byId('paperLog').replaceChildren(...paper.logs.slice(-16).reverse().map(t=>{const li=document.createElement('li');li.textContent=t;return li}));
+      byId('placePaper').disabled=paper.index>=paper.bars.length-1;
+      byId('advancePaper').disabled=paper.index>=paper.bars.length-1;
+      if(paper.index>=paper.bars.length-1)byId('paperOrder').textContent='已到最后一天；可以换个行情重新开始。';
+      drawPaperChart();
+    }
+    function paperMessage(t){paper.logs.push(t);byId('paperOrder').textContent=t;byId('paperLog').replaceChildren(...paper.logs.slice(-16).reverse().map(x=>{const li=document.createElement('li');li.textContent=x;return li}))}
+    document.querySelectorAll('[data-side]').forEach(b=>b.addEventListener('click',()=>{paper.side=b.dataset.side;document.querySelectorAll('[data-side]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));savePaper()}));
+    byId('placePaper').addEventListener('click',()=>{
+      const price=Number(byId('paperLimit').value),qty=Number(byId('paperQty').value),current=paper.bars[paper.index].close;
+      const min=roundCent(current*.9),max=roundCent(current*1.1);
+      if(!Number.isFinite(price)||price<=0||Math.abs(price*100-Math.round(price*100))>.000001){paperMessage('限价请输入正数，并精确到 0.01 元。');return}
+      if(price<min||price>max){paperMessage('本场景的次日申报价请放在 '+money(min)+' 到 '+money(max)+' 之间。');return}
+      if(!Number.isInteger(qty)||qty<=0||qty%100!==0){paperMessage('数量请输入 100 股的整数倍。');return}
+      if(paper.side==='buy'&&roundCent(price*qty+paperFees(price*qty,'buy'))>paper.cash){paperMessage('可用现金不足以覆盖按限价计算的股款与费用。');return}
+      if(paper.side==='sell'&&qty>paper.shares){paperMessage('可卖持仓不足；本模拟只允许卖出已经持有的股份。');return}
+      paper.pending={side:paper.side,price:roundCent(price),qty};
+      paperMessage('第 '+(paper.index+1)+' 天挂单：次日尝试'+(paper.side==='buy'?'买入 ':'卖出 ')+qty+' 股，限价 '+money(price)+'。');
+      savePaper();renderPaper();
+    });
+    byId('advancePaper').addEventListener('click',()=>{
+      if(paper.index>=paper.bars.length-1)return;
+      const next=paper.bars[paper.index+1],order=paper.pending;
+      paper.index++;
+      if(order){
+        const canFill=order.side==='buy'?next.low<=order.price:next.high>=order.price;
+        if(canFill){
+          const execution=order.side==='buy'?(next.open<=order.price?next.open:order.price):(next.open>=order.price?next.open:order.price);
+          const amount=roundCent(execution*order.qty),fees=paperFees(amount,order.side);
+          let executed=false;
+          if(order.side==='buy'){
+            if(roundCent(amount+fees)<=paper.cash){
+              paper.avgCost=(paper.avgCost*paper.shares+amount+fees)/(paper.shares+order.qty);
+              paper.cash=roundCent(paper.cash-amount-fees);paper.shares+=order.qty;
+              executed=true;
+              paper.logs.push('第 '+(paper.index+1)+' 天买入成交：'+order.qty+' 股 × '+money(execution)+'；费用 '+cashText(fees)+'。');
+            }else paper.logs.push('第 '+(paper.index+1)+' 天：现金不足，买单未成交。');
+          }else{
+            const result=roundCent(amount-fees-paper.avgCost*order.qty);
+            paper.cash=roundCent(paper.cash+amount-fees);paper.shares-=order.qty;paper.realized=roundCent(paper.realized+result);
+            if(paper.shares===0)paper.avgCost=0;
+            executed=true;
+            paper.logs.push('第 '+(paper.index+1)+' 天卖出成交：'+order.qty+' 股 × '+money(execution)+'；费用 '+cashText(fees)+'；本笔已实现盈亏 '+(result>=0?'+':'')+cashText(result)+'。');
+          }
+          if(executed)paper.fees=roundCent(paper.fees+fees);
+        }else paper.logs.push('第 '+(paper.index+1)+' 天：未触及限价 '+money(order.price)+'，委托到日终失效。');
+      }else paper.logs.push('第 '+(paper.index+1)+' 天：未下单，只观察行情。');
+      if(paperNews[paper.index])paper.logs.push('聪沐消息：'+paperNews[paper.index]);
+      paper.pending=null;byId('paperLimit').value=next.close.toFixed(2);
+      savePaper();renderPaper();
+    });
+    byId('resetPaper').addEventListener('click',()=>{paper=freshPaper();byId('paperLimit').value=paper.bars[paper.index].close.toFixed(2);byId('paperQty').value='100';savePaper();renderPaper()});
+    byId('paperLimit').value=(paper.pending?paper.pending.price:paper.bars[paper.index].close).toFixed(2);
+    if(paper.pending)byId('paperQty').value=String(paper.pending.qty);
+    renderPaper();
 
     const sections=[...document.querySelectorAll('.section')],links=[...document.querySelectorAll('#toc a')];let ticking=false;
     function updateReading(){const y=window.scrollY,maximum=document.documentElement.scrollHeight-window.innerHeight;byId('readProgress').style.width=(maximum>0?Math.min(100,y/maximum*100):0)+'%';let current=sections[0].id;for(const s of sections){if(s.getBoundingClientRect().top<170)current=s.id}links.forEach(a=>a.classList.toggle('active',a.hash==='#'+current));ticking=false}
