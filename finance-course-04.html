@@ -29,6 +29,7 @@
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}}
     @media print{.rail,.hero-cta,.progress,.choice-row,.order-actions,.reset,.news-cards,.trade-actions,.trade-side{display:none!important}.shell{display:block}.hero{background:#fff;color:#000;padding:10px 0 18px}.hero .lead{color:#222}.content{max-width:none;padding:0}.section{break-inside:avoid;padding-top:23px}.card,.sim{box-shadow:none}}
   </style>
+<link rel="stylesheet" href="assets/course-art.css?v=20260928-art">
 </head>
 <body>
   <div class="progress" id="readProgress" aria-hidden="true"></div>
@@ -51,6 +52,8 @@
         <section class="section" id="opening">
           <div class="section-top"><span class="num">00</span><div><p class="kicker">承接第三课：聪沐已经上市</p><h2>第一天看行情，阿林问了三个问题</h2><span class="episode">本课对应合集第 13、14、15、21、25、32、43、52、53、61、91 集</span></div></div>
           <p class="intro">第三课讲了聪沐怎样发行股票、申请上市。这一课把镜头移到<b>上市后的交易</b>：投资者在交易所买卖已有股票，钱通常在买卖双方之间流动；交易价格则由愿意买和愿意卖的订单撮合出来。</p>
+<figure class="course-art"><img src="assets/course-market.webp" alt="工厂照常开工，股票开始交易：车间在生产，投资者在买卖股票。这是两条有关联的线：二级市场成交的钱通常在交易双方之间流动。" width="1672" height="941" loading="lazy" decoding="async"><figcaption><span class="course-art-label">聪沐故事 · 虚构卡通情境</span><strong class="course-art-title">工厂照常开工，股票开始交易</strong><span class="course-art-copy">车间在生产，投资者在买卖股票。这是两条有关联的线：二级市场成交的钱通常在交易双方之间流动。</span><span class="course-art-next">接着用盘口、竞价和模拟盘，看看价格如何形成。</span></figcaption></figure>
+
           <div class="comic" aria-label="聪沐上市后的三格小故事"><div><span aria-hidden="true">🏭📦</span><small>8:30 · 聪沐办公室</small><b>你在看订单</b><p>秋季卫衣的新款卖得怎样？工厂和现金流才是公司的日常。</p></div><div><span aria-hidden="true">📱📈</span><small>9:25 · 阿林看手机</small><b>“开盘价涨了！”</b><p>阿林问：“我们公司的银行账户也跟着变多了吗？”</p></div><div><span aria-hidden="true">🤔💬</span><small>15:00 · 收盘讨论</small><b>“谁决定了今天的价？”</b><p>你们决定从最简单的买卖订单开始拆开看。</p></div></div>
           <div class="callout light"><b>贯穿本课的一句话</b><p>股价是市场上股票成交的价格。它会受到企业信息和投资者预期影响，但每一次跳动直接来自交易订单；它不等于公司账上的现金，也不等于股票的“真实价值”。</p></div>
         </section>
@@ -111,6 +114,8 @@
         <section class="section" id="expectations">
           <div class="section-top"><span class="num">06</span><div><p class="kicker">价格交易的是对未来的不同看法</p><h2>聪沐今年亏了钱，股价为何还可能涨？</h2><span class="episode">对应合集：第 53 集；衔接第 13、91 集</span></div></div>
           <p class="intro">股价不是把当年利润直接写到屏幕上。假设聪沐去年亏损 200 万元，投资者仍会判断未来订单、成本和风险。若新信息让更多人愿出更高价格，成交价可能上涨；如果期望落空，也可能下跌。<b>亏损与上涨可以同时发生，不代表风险消失。</b></p>
+<figure class="course-art"><img src="assets/finale-03.webp" alt="手机上的价格，还包含对未来的判断：同样一间工厂，有人看好新订单，有人担心成本。未来能否兑现还未确定，今天的成交价却已经在变化。" width="1672" height="941" loading="lazy" decoding="async"><figcaption><span class="course-art-label">聪沐故事 · 虚构卡通情境</span><strong class="course-art-title">手机上的价格，还包含对未来的判断</strong><span class="course-art-copy">同样一间工厂，有人看好新订单，有人担心成本。未来能否兑现还未确定，今天的成交价却已经在变化。</span><span class="course-art-next">下面换一张后续消息卡，观察预期怎样改变。</span></figcaption></figure>
+
           <div class="sim" aria-labelledby="newsTitle"><span class="example">聪沐公告室 · 情境演示</span><h3 id="newsTitle">同一份亏损年报，遇到三种后续信息</h3><p>以下价格变化只为说明方向与逻辑，不是收益预测。点一张消息卡，看看阿林为何重新评估未来。</p><div class="news-cards" role="group" aria-label="聪沐后续公告情境"><button type="button" data-news="order" aria-pressed="true"><span aria-hidden="true">📦</span><b>新订单确认</b><small>未来销售可能改善</small></button><button type="button" data-news="delay" aria-pressed="false"><span aria-hidden="true">⏳</span><b>扩厂延期</b><small>交货与成本压力增加</small></button><button type="button" data-news="unknown" aria-pressed="false"><span aria-hidden="true">❔</span><b>消息不完整</b><small>投资者看法分歧</small></button></div><div class="news-result" aria-live="polite"><div><small>虚构成交价</small><strong id="newsPrice">¥12.00</strong><small>原价假设 ¥10.00</small></div><p id="newsExplain">确认的长期订单让部分投资者上调未来现金流预期，愿意出更高价。公司过去一年仍亏损 200 万元；新订单也不等于利润已经兑现。</p></div><div class="metric-row"><div class="metric"><small>假设已发行股数</small><strong>80 万股</strong></div><div class="metric"><small>按当前价算的市值</small><strong id="newsCap">¥960 万</strong></div><div class="metric"><small>公司账上因股价变动新增现金</small><strong>¥0</strong></div></div></div>
           <div class="grid-2"><div class="card"><h3>可能解释上涨的因素</h3><p>对未来利润、融资、产品和管理的预期改善；也可能仅是短期交易需求增加。需要用公告、财报与成交信息交叉判断，不能由涨价反推“公司已赚钱”。</p></div><div class="card warm"><h3>第 91 集的开放问题</h3><p>“A 股现在最需要什么”是观点题，没有唯一数值答案。对个人学习更有用的角度是：公司披露是否可信、交易规则能否支持有序定价、风险是否被充分认识。下次看价格，先问这些事实。</p></div></div>
         </section>
@@ -151,7 +156,7 @@
           <h3 style="margin-top:34px">资料与制作说明</h3>
           <p>聪沐、阿林、订单簿、竞价数量、模拟盘、公告情境和全部模拟价格均为虚构教学示例。模拟盘每次重开随机生成价格路径，与真实市场或未来行情无关。真实规则与案例附原始来源。本课根据合集的<b>视频标题</b>规划覆盖范围，未逐集核实视频中的具体说法。资料核对于 2026 年 9 月；交易规则、税费、假期安排及基金合规要求以当期正式文件为准。课程用于理解概念，不作个别投资建议。</p>
           <ol class="sources"><li><a href="https://www.sse.com.cn/lawandrules/sselawsrules2025/stocks/exchange/c/c_20260424_10816482.shtml" target="_blank" rel="noopener noreferrer">上海证券交易所交易规则（2026 年修订）</a>：交易时间、100 股申报、交易日限制、价格时间优先、集合与连续竞价。</li><li><a href="https://one.sse.com.cn/onething/gptz/" target="_blank" rel="noopener noreferrer">上交所：股票投资与交易费用</a>：印花税、过户费和佣金；模拟盘佣金率为教学假设。</li><li><a href="https://www.investor.gov/introduction-investing/investing-basics/glossary/ask-price" target="_blank" rel="noopener noreferrer">Investor.gov：买价、卖价与价差</a>；<a href="https://www.investor.gov/introduction-investing" target="_blank" rel="noopener noreferrer">影响股价的因素</a>。</li><li><a href="https://www.csrc.gov.cn/csrc/c100200/c1000469/content.shtml" target="_blank" rel="noopener noreferrer">证监会：北八道操纵市场案</a>；<a href="https://www.csrc.gov.cn/csrc/c101877/c1029606/content.shtml" target="_blank" rel="noopener noreferrer">基金从业人员投资基金规定</a>。</li><li><a href="https://www.hkex.com.hk/-/media/hkex-market/mutual-market/stock-connect/reference-materials/resources/glossary_simplified" target="_blank" rel="noopener noreferrer">港交所：中港金融词汇对照表（仙股）</a>；<a href="https://www.investor.gov/introduction-investing/investing-basics/glossary/stock-split" target="_blank" rel="noopener noreferrer">Investor.gov：股份拆细</a>。</li><li><a href="https://big5.sse.com.cn/site/cht/www.sse.com.cn/disclosure/announcement/general/c/c_20260915_10832273.shtml" target="_blank" rel="noopener noreferrer">上交所：2026 年中秋节、国庆节休市安排</a>。</li></ol>
-          <div class="footer"><a href="index.html">返回课程首页</a> · <a href="finance-course-03.html">回看第 03 课</a> · 第 04 课 · 版本 2026-09-25 · 独立 HTML，可离线阅读与操作；官方资料链接需要联网。</div>
+          <div class="footer"><a href="index.html">返回课程首页</a> · <a href="finance-course-03.html?v=20260928-art">回看第 03 课</a> · 第 04 课 · 版本 2026-09-25 · 独立 HTML，可离线阅读与操作；官方资料链接需要联网。</div>
         </section>
       </div>
     </main>
